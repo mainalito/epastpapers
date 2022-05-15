@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Revision Papers</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<style>
+		.container {
+			display: grid;
+
+			grid-template-areas:
+				"header header header"
+				"content content side"
+				"footer footer footer";
+
+			grid-template-columns: 200px 1fr 200px;
+			grid-template-rows: auto 1fr auto;
+			grid-gap: 10px;
+
+			height: 100vh;
+		}
+
+		header {
+			grid-area: header;
+		}
+
+		nav {
+			grid-area: nav;
+			margin-left: 0.5rem;
+		}
+
+		main {
+			grid-area: content;
+		}
+
+		aside {
+			grid-area: side;
+			margin-right: 0.5rem;
+		}
+
+		footer {
+			grid-area: footer;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<h1>Revision Papers</h1>
+		</header>
+
+		<main>
+			<div class="card-group">
+				<div class="card" style="flex: 0 0 30%; margin:30px " th:each="faculty: ${facultyExam}">
+					<div class="card-body ">
+						<div th:text="${faculty.name}"></div>
+						<div th:text="${faculty.id}"></div>
+						<a th:href="@{'/downloadFile/'+${faculty.id}}">Download</a>
+					</div>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<!-- Footer content -->
+		</footer>
+	</div>
+
+
+</body>
+
+</html>
