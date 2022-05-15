@@ -1,10 +1,10 @@
-package com.epastpapers.EpastpaperController;
+package com.epastpapers.epastpapers.EpastpaperController;
 
 import java.util.List;
 
-import com.epastpapers.PastPapers.Exams;
-import com.epastpapers.repository.ExamRepo;
-import com.epastpapers.repository.FacultyRepo;
+import com.epastpapers.epastpapers.PastPapers.Exams;
+import com.epastpapers.epastpapers.repository.ExamRepo;
+import com.epastpapers.epastpapers.repository.FacultyRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,10 +28,9 @@ public class FacultyController {
 		return "index";
 	}
 	@GetMapping("/faculty/{id}")
-	public String showFacultiesExams(@PathVariable int id,  Model model) {
-		Exams exams = new Exams();
+	public String showFacultiesExams(@PathVariable Long id,  Model model) {
+		
 		List<Exams> s= examRepo.findByfaculty_id(id);
-		s.forEach(r->System.out.println(r));
 		
 		model.addAttribute("facultyExam",s);
 

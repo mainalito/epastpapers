@@ -16,11 +16,11 @@
 <body>
 	<div class="container p-5">
 		<h1>Revision Past Papers</h1>
-		<form action="#" th:action="@{/exam/save}" method="post" th:object="${exam}" encType="multipart/form-data">
+		<form action="#" th:action="@{/exam/upload}" method="post" th:object="${exam}" encType="multipart/form-data">
 		<input type="file" name="files" required/>
 			<div class="col-sm-8">
 				<label for="exampleInputEmail1" class="form-label">Unit Name for the Exam</label>
-				<input type="text" th:field="*{name}" class="form-control" id="exampleInputEmail1"
+				<input type="text" th:field="*{fileName}" class="form-control" id="exampleInputEmail1"
 					aria-describedby="emailHelp">
 			</div>
 			<div class="col-sm-8">
