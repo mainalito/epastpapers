@@ -8,53 +8,21 @@
 	<title>Revision Papers</title>
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<style>
-		.container {
-			display: grid;
 
-			grid-template-areas:
-				"header header header"
-				"content content side"
-				"footer footer footer";
-
-			grid-template-columns: 200px 1fr 200px;
-			grid-template-rows: auto 1fr auto;
-			grid-gap: 10px;
-
-			height: 100vh;
-		}
-
-		header {
-			grid-area: header;
-		}
-
-		nav {
-			grid-area: nav;
-			margin-left: 0.5rem;
-		}
-
-		main {
-			grid-area: content;
-		}
-
-		aside {
-			grid-area: side;
-			margin-right: 0.5rem;
-		}
-
-		footer {
-			grid-area: footer;
-		}
-	</style>
 
 </head>
 
 <body>
 	<div class="container">
-		<header>
-			<h1>Revision Papers</h1>
-		</header>
-
+		<nav class="navbar bg-light">
+			<div class="container-fluid">
+			  <a class="navbar-brand">Revision Papers</a>
+			  <form class="d-flex" role="search"  th:attr="action=@{/search}" method= "GET">
+				<input class="form-control me-2" name="query" type="search" autocomplete="off" placeholder="Search by unit name" aria-label="Search">
+				<button class="btn btn-outline-success" type="submit">Search</button>
+			  </form>
+			</div>
+		  </nav>
 		<main>
 			<div class="card-group">
 				<div class="card" style="flex: 0 0 30%; margin:30px " th:each="faculty: ${faculties}">

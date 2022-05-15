@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="card-group">
+      <div class="card" style="flex: 0 0 18%; margin: 30px"  >
+            <div class="card-body" th:each="result: ${results}">
+                <div th:text="${result.fileName}"></div>
+                <div th:text="${result.year}"></div>
+                <a th:href="@{'/downloadFile/'+${result.id}}">Download</a>
+            </div>
+      </div>
+    </div>
+  </body>
+</html>

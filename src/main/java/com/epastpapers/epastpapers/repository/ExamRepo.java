@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 public interface ExamRepo extends CrudRepository<Exams, Long> {
+
+	@Query(value = "select * from exams where file_name LIKE %?1%", nativeQuery = true)
+	List<Exams>findByfileNameLike(String fileName);
 	
 	@Query("FROM Exams e WHERE e.faculty.id=:facultyIdFK")
 	List<Exams> findByFacultyId(@PathVariable("facultyIdFK") Long facultyIdFK);
