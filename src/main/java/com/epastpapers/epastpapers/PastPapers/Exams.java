@@ -1,7 +1,5 @@
 package com.epastpapers.epastpapers.PastPapers;
 
-import java.util.Arrays;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

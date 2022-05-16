@@ -10,10 +10,8 @@ import com.epastpapers.epastpapers.repository.FacultyRepo;
 import com.epastpapers.epastpapers.service.Services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -80,20 +78,4 @@ public class ExamController {
 
 	}
 
-	// @GetMapping("/downloadFile/{id}")
-	// public void downloadDocument(@PathVariable("id") Long id, HttpServletResponse response) {
-	// 	Exams exams = service.getFile(id);
-	// 	response.setContentType("application/pdf");
-	// 	String headerKey = "Content-Disposition";
-	// 	String headerValue = "attachment; filename=" + exams.getName()+"."+exams.getDocType().replaceAll("application/","");
-	// 	response.setHeader(headerKey, headerValue);
-	// 	try {
-	// 		ServletOutputStream outputStream = response.getOutputStream();
-	// 		outputStream.write(exams.getData());
-	// 	} catch (IOException e) {
-	// 		// TODO Auto-generated catch block
-	// 		e.printStackTrace();
-	// 	}
-
-	// }
 }

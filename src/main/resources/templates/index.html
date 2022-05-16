@@ -1,44 +1,80 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExamPast Papers</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" th:href="@{style.css}" />
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Revision Papers</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
-</head>
-
-<body>
-	<div class="container">
-		<nav class="navbar bg-light">
-			<div class="container-fluid">
-			  <a class="navbar-brand">Revision Papers</a>
-			  <form class="d-flex" role="search"  th:attr="action=@{/search}" method= "GET">
-				<input class="form-control me-2" name="query" type="search" autocomplete="off" placeholder="Search by unit name" aria-label="Search">
-				<button class="btn btn-outline-success" type="submit">Search</button>
-			  </form>
-			</div>
-		  </nav>
-		<main>
-			<div class="card-group">
-				<div class="card" style="flex: 0 0 30%; margin:30px " th:each="faculty: ${faculties}">
-					<div class="card-body ">
-						<h5 ></h5>
-						<a href="#" th:href="@{/faculty/{id}(id=${faculty.id})}"  class="card-title" th:text="${faculty.name}"></a>
-					</div>
-				</div>
-			</div>
-		</main>
-		<footer>
-			<!-- Footer content -->
-		</footer>
-	</div>
-
-
-</body>
-
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="search-input">
+        <form class="mini-search" method="get" th:action="@{/search}">
+          <input
+            type="text"
+            name="query"
+            placeholder="type to search .."
+            id=""
+            autocomplete="off"
+          />
+          <button class="icon"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="mini">
+        <div class="mini-title">
+          <i class="fa-solid fa-computer"></i>
+          <a href="#" th:href="@{/faculty/1}">SOCIAL SCIENCES AND TECHNOLOGY</a>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="mini-title">
+          <i class="fa-solid fa-tower-cell"></i>
+          <a href="#" th:href="@{/faculty/2}">SCIENCE AND TECHNOLOGY</a>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="mini-title">
+          <i class="fa-solid fa-tower-cell"></i>
+          <a href="#" th:href="@{/faculty/3}">MEDIA AND COMMUNICATION</a>
+        </div>
+     
+      </div>
+      <div class="mini">
+        <div class="mini-title">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+          <a href="#" th:href="@{/faculty/4}">BUSINESS AND ECONOMICS</a>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="mini-title">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+          <a href="#" th:href="@{/faculty/5}">ENGINEERING AND TECHNOLOGY</a>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="mini-title">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+          <a href="#" th:href="@{/faculty/6}"
+            >COMPUTING INFORMATION AND TECHNOLOGY</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

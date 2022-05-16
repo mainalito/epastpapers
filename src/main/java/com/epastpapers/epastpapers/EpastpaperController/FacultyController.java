@@ -1,6 +1,5 @@
 package com.epastpapers.epastpapers.EpastpaperController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.epastpapers.epastpapers.PastPapers.Exams;
@@ -32,7 +31,6 @@ public class FacultyController {
 	@GetMapping("/search")
 	public String searchLikeStudents(@RequestParam("query") String query, Model model) {
 
-		System.out.println("RESULTS =============================" + examRepo.findByfileNameLike(StringUtils.capitalize(query)));
 		model.addAttribute("results", examRepo.findByfileNameLike(StringUtils.capitalize(query)));
 		return "search";
 	}
