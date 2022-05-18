@@ -4,16 +4,191 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Examination Past Papers</title>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
   </head>
   <body>
-    <div class="card-group">
-      <div class="card" style="flex: 0 0 18%; margin: 30px"  >
-            <div class="card-body" th:each="result: ${results}">
-                <div th:text="${result.fileName}"></div>
-                <div th:text="${result.year}"></div>
-                <a th:href="@{'/downloadFile/'+${result.id}}">Download</a>
-            </div>
+    <style th:inline="css">
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,200&display=swap");
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Poppins", sans-serif;
+      }
+
+      nav {
+        background-color: black;
+        padding: 1rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      nav ul {
+        display: flex;
+        justify-content: center;
+        justify-content: flex-end;
+      }
+      nav ul li {
+        list-style-type: none;
+        margin-left: 20px;
+      }
+      nav ul li a {
+        text-decoration: none;
+        color: white;
+      }
+      .search-input {
+        padding: 0.5rem 2rem;
+        background-color: white;
+        border-radius: 5px;
+        /* box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12); */
+        box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+      }
+      .search-input input {
+        height: 40px;
+        outline: none;
+        border: none;
+        border-radius: 5px;
+        padding: 0 60px 0 20px;
+        font-size: 16px;
+        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+      }
+
+      .mini-search {
+        display: flex;
+        align-items: center;
+      }
+      .mini-search .icon {
+        margin-left: 10px;
+        font-size: 20px;
+        color: black;
+        cursor: pointer;
+        background-color: transparent;
+        border: none;
+        outline: none;
+        border-radius: 0.5rem;
+      }
+
+      .mini {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .mini a {
+        text-decoration: none;
+        color: black;
+        margin-top: 30px;
+      }
+
+      .mini i {
+        font-size: 1.5rem;
+      }
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+      }
+
+      body {
+        min-height: 100vh;
+        min-width: none;
+        background-color: #efefef;
+        display: flex;
+        align-items: center;
+
+        flex-direction: column;
+      }
+      .container .mini {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        box-shadow: 0px 0.3px 4px rgba(0, 0, 0, 0.17);
+        background-color: white;
+        padding: 2rem;
+        width: 400px;
+        height: 200px;
+        margin-top: 40px;
+        margin-left: 20px;
+      }
+
+      .title {
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .title .year {
+        margin-left: 1rem;
+        color: rebeccapurple;
+      }
+
+      .download {
+        margin-top: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mini .download a {
+        cursor: pointer;
+      }
+
+      .download a i {
+        font-size: 1.4rem;
+      }
+
+      .download a:hover {
+        background-color: whitesmoke;
+      }
+      @media (max-width: 768px) {
+        nav {
+          flex-wrap: wrap;
+        }
+        .search-input input {
+          height: 30px;
+        }
+      }
+    </style>
+    <nav>
+      <ul>
+        <li><a th:href="@{/}">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="search-input">
+        <form class="mini-search" method="get" th:action="@{/search}">
+          <input
+            type="text"
+            name="query"
+            placeholder="type to search .."
+            id=""
+            autocomplete="off"
+          />
+          <button class="icon"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="mini" th:each="result: ${results}">
+        <div class="title">
+          <p class="fileName" th:text="${result.fileName}"></p>
+          <p class="year" th:text="${result.date}"></p>
+        </div>
+        <div class="download">
+          <a th:href="@{'/downloadFile/'+${result.id}}"
+            ><i class="fa-solid fa-file-arrow-down"></i
+          ></a>
+        </div>
       </div>
     </div>
   </body>

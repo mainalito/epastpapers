@@ -184,7 +184,7 @@
       <div class="mini" th:each="faculty: ${facultyExam}">
         <div class="title">
           <p class="fileName" th:text="${faculty.fileName}"></p>
-          <p class="year" th:text="${faculty.year}"></p>
+          <p class="year" th:text="${#dates.format(faculty.date, 'dd-MM-yyyy')}"></p>
         </div>
         <div class="download">
           <a th:href="@{'/downloadFile/'+${faculty.id}}"

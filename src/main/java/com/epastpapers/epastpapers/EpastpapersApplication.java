@@ -20,6 +20,20 @@ public class EpastpapersApplication {
 		SpringApplication.run(EpastpapersApplication.class, args);
 	}
 
+	public void save(){
+		facultyRepo.save(new FACULTY("SOCIAL SCIENCES AND TECHNOLOGY"));
+		facultyRepo.save(new FACULTY("SCIENCE AND TECHNOLOGY"));
+		facultyRepo.save(new FACULTY("MEDIA AND COMMUNICATION"));
+		facultyRepo.save(new FACULTY("BUSINESS AND ECONOMICS"));
+		facultyRepo.save(new FACULTY("ENGINEERING AND TECHNOLOGY"));
+		facultyRepo.save(new FACULTY("COMPUTING AND INFORMATION TECHNOLOGY"));
 
+
+	}
+
+	@PostConstruct
+	public void init(){
+		save();
+	}
 
 }
