@@ -182,7 +182,7 @@
       <div class="mini" th:each="result: ${results}">
         <div class="title">
           <p class="fileName" th:text="${result.fileName}"></p>
-          <p class="year" th:text="${result.date}"></p>
+          <p class="year" th:text="${#dates.format(result.date, 'yyyy')}"></p>
         </div>
         <div class="download">
           <a th:href="@{'/downloadFile/'+${result.id}}"

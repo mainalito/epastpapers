@@ -20,16 +20,23 @@ public class Services implements StorageService {
 
 	@Override
 	public void saveFile(MultipartFile File, Exams exams) throws Exception {
+		//List<String> fileExtensions = List.of(".pdf, .docx");
+		
 		String fileName = StringUtils.cleanPath(File.getOriginalFilename());
-
+		String subString = fileName.substring(fileName.lastIndexOf("."), fileName.length());
 		try {
-			if (fileName.contains("..")) {
+			if (fileName.contains("..") ) {
 				throw new Exception("Filename contains invalid path " + fileName);
 			}
-			exams.setOriginalFileName(fileName);
-			exams.setData(File.getBytes());
-			exams.setFileType(File.getContentType());
-			examRepo.save(exams);
+			else if(subString.toLowerCase().equals(".pdf")){
+
+				exams.setOriginalFileName(fileName);
+				exams.setData(File.getBytes());
+				exams.setFileType(File.getContentType());
+				System.out.println(fileName + "====================== " + subString);
+				examRepo.save(exams);
+			}
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

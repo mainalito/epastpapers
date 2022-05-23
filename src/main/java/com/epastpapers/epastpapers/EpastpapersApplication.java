@@ -33,7 +33,7 @@ public class EpastpapersApplication {
 
 	@PostConstruct
 	public void init(){
-		save();
+		//save();
 	}
 
 }

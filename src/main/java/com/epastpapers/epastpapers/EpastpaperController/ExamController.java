@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.print.MultiDocPrintJob;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,11 +17,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
@@ -48,19 +52,31 @@ public class ExamController {
 	}
 
 	@PostMapping("/exam/upload")
-	public String saveProduct(@RequestParam("files") MultipartFile[] files, Exams exams) throws Exception {
+	public String saveProduct(@RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes,Exams exams, BindingResult result) throws Exception {
+		String fileName = StringUtils.cleanPath(exams.getOriginalFileName());
+		String subString = fileName.substring(fileName.lastIndexOf("."), fileName.length());
 		String downloadUrl = "";
+		
+		//String[] fileExtensions = {".docx",".pdf"};
+		if(subString.toLowerCase().equals(".pdf")){
+
+			downloadUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+							.path("/download")
+							.path(String.valueOf(exams.getId()))
+							.toUriString();
+			
+			for (MultipartFile file : files) {
+				service.saveFile(file, exams);
+			}
+			redirectAttributes.addFlashAttribute("errorMessage", "You have successfully uploaded file" );
+
+			return "redirect:/";
+		}
+		else{
+			return "error";
+		}
 
 		//fetch url
-		downloadUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
-						.path("/download")
-						.path(String.valueOf(exams.getId()))
-						.toUriString();
-		
-		for (MultipartFile file : files) {
-			service.saveFile(file, exams);
-		}
-		return "redirect:/";
 	}
 
 
