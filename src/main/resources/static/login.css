@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <!-- ===== Iconscout CSS ===== -->
-    <link
-      rel="stylesheet"
-      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
-    />
-
-    <title>Login Form</title>
-  </head>
-  <body>
-    <style th:inline="css">
-      /* ===== Google Font Import - Poformsins ===== */
+/* ===== Google Font Import - Poformsins ===== */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 *{
@@ -30,7 +13,7 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: whitesmoke;
+    background-color: #4070f4;
 }
 
 .container{
@@ -175,7 +158,7 @@ body{
     margin-top: 35px;
 }
 
-.form .button button{
+.form .button input{
     border: none;
     color: #fff;
     font-size: 17px;
@@ -183,13 +166,11 @@ body{
     letter-spacing: 1px;
     border-radius: 6px;
     background-color: #4070f4;
-    padding: 0.85rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 100%;
 }
 
-.button button:hover{
+.button input:hover{
     background-color: #265df2;
 }
 
@@ -197,61 +178,3 @@ body{
     margin-top: 30px;
     text-align: center;
 }
-
-      </style>
-    <div class="container">
-      <div class="forms">
-        <div class="form login">
-          <span class="title">Login</span>
-          <!-- error message -->
-          <div th:if="${param.error}">
-            <div class="alert alert-info">Invalid username or password</div>
-          </div>
-
-          <!-- logout message -->
-          <div th:if="${param.logout}">
-            <div class="alert alert-info">You have logged out</div>
-          </div>
-
-          <form action="#" th:action="@{/login}" method="post">
-            <div class="input-field">
-              <input
-                type="text"
-                autofocus="autofocus"
-                placeholder="Registration number"
-                name="username"
-                required
-              />
-              <i class="uil uil-envelope icon"></i>
-            </div>
-            <div class="input-field">
-              <input
-                type="password"
-                class="password"
-                name="password"
-                placeholder="Enter your password"
-                required
-              />
-              <i class="uil uil-lock icon"></i>
-              <i class="uil uil-eye-slash showHidePw"></i>
-            </div>
-            <div class="input-field button">
-              <button type="submit">Login</button>
-            </div>
-          </form>
-
-          <div class="login-signup">
-            <span class="text"
-              >Not a member?
-              <a href="#" th:href="@{/registration}" class="text signup-link"
-                >Signup now</a
-              >
-            </span>
-          </div>
-        </div>
-
-        <!-- Registration Form -->
-      </div>
-    </div>
-  </body>
-</html>
