@@ -57,7 +57,8 @@ public class UserServiceImplementation implements UserService {
         String encodedPassword = passwordEncoder.encode(registrationDto.getPassword());
         Users users = new Users(registrationDto.getFirstName(), registrationDto.getLastName(),
         registrationDto.getEmail(), registrationDto.getUserName(), encodedPassword,
-        Collections.singletonList(new Roles("ROLE_USER")));
+        Collections.singletonList(new Roles("USER")));
+      
 
         userRepository.save(users);
 

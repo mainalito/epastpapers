@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
@@ -197,13 +196,18 @@
         margin-top: 30px;
         text-align: center;
       }
+      .danger {
+        background-color: #dc3545;
+        padding: 1rem;
+        border-radius: 0.85rem;
+      }
     </style>
     <div class="container">
       <div class="forms">
         <div class="form login">
           <span class="title">Admin Login</span>
           <!-- error message -->
-          <p th:if="${param.error}">Login failed!</p>
+          <p class="danger"  th:if="${param.error}">Login failed!</p>
           <!-- logout message -->
           <div th:if="${param.logout}">
             <div class="alert alert-info">You have logged out</div>
@@ -240,5 +244,13 @@
         <!-- Registration Form -->
       </div>
     </div>
+    <script th:inline="javascript">
+      function closeHelpDiv() {
+        document.querySelector(".danger").style.display = " none";
+      }
+
+      // close the div in 5 secs
+      window.setTimeout(closeHelpDiv, 5000);
+    </script>
   </body>
 </html>

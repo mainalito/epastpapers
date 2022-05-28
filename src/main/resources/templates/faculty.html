@@ -27,7 +27,7 @@
       }
 
       nav {
-        background-color: black;
+        background-color: #4070f4;
         padding: 1rem;
         width: 100%;
         display: flex;
@@ -180,6 +180,7 @@
         </form>
       </div>
     </nav>
+    
     <div class="container">
       <div class="mini" th:each="faculty: ${facultyExam}">
         <div class="title">
@@ -193,5 +194,8 @@
         </div>
       </div>
     </div>
+    <div th:if="${errorMessage}">
+      <div class="alert alert-success" th:text="${errorMessage}"></div>
+  </div>
   </body>
 </html>

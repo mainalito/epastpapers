@@ -22,7 +22,8 @@ public class Roles {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    public Roles(String name){
+
+    public Roles(String name) {
         this.name = name;
     }
 }

@@ -3,6 +3,7 @@ package com.epastpapers.epastpapers.service;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
+import java.util.Objects;
 
 import com.epastpapers.epastpapers.PastPapers.Exams;
 import com.epastpapers.epastpapers.repository.ExamRepo;
@@ -22,7 +23,7 @@ public class Services implements StorageService {
 	public void saveFile(MultipartFile File, Exams exams) throws Exception {
 		//List<String> fileExtensions = List.of(".pdf, .docx");
 		
-		String fileName = StringUtils.cleanPath(File.getOriginalFilename());
+		String fileName = StringUtils.cleanPath(Objects.requireNonNull(File.getOriginalFilename()));
 		String subString = fileName.substring(fileName.lastIndexOf("."), fileName.length());
 		try {
 			if (fileName.contains("..") ) {

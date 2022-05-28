@@ -15,5 +15,15 @@ public class MainController {
     public String home() {
         return "index";
     }
+    
+    @GetMapping("/adminPage")
+    public String getAdminPage() {
+        return "index";
+    }
+
+    @GetMapping("/loginAdmin")
+    public String getAdminLoginPage() {
+        return "loginAdmin";
+    }
 
 }

@@ -17,7 +17,7 @@
 	<div class="container p-5">
 		<h1>Revision Past Papers</h1>
 		<div th:if="${errorMessage}">
-            <div class="alert alert-danger" th:text="${errorMessage}"></div>
+            <div class="alert alert-success" th:text="${errorMessage}"></div>
         </div>
 		<form action="#" th:action="@{/exam/upload}" method="post" th:object="${exam}" encType="multipart/form-data">
 		<input type="file" name="files" required/>

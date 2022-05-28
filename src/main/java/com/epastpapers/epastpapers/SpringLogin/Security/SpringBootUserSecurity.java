@@ -55,7 +55,7 @@ public class SpringBootUserSecurity extends WebSecurityConfigurerAdapter {
         // .logoutSuccessUrl("/login?logout")
         // .permitAll();
         http.authorizeRequests()
-                .antMatchers("/**")
+                .antMatchers("/loginAdmin","/registration**","/js/**","/css/**")
                 .permitAll().anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
                 .defaultSuccessUrl("/", true)

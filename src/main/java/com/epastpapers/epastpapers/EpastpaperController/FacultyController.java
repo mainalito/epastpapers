@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class FacultyController {
@@ -36,11 +37,19 @@ public class FacultyController {
 	}
 
 	@GetMapping("/faculty/{id}")
-	public String showFacultiesExams(@PathVariable Long id, Model model) {
+	public String showFacultiesExams(@PathVariable Long id, Model model,
+	RedirectAttributes redirectAttributes) {
 
 		List<Exams> s = examRepo.findByfaculty_id(id);
+		
+		if(!s.isEmpty()){
+			model.addAttribute("facultyExam", s);
 
-		model.addAttribute("facultyExam", s);
+		}
+		else{
+			redirectAttributes.addFlashAttribute("errorMessage", "No exams found" );
+		}
+
 
 		return "faculty";
 	}

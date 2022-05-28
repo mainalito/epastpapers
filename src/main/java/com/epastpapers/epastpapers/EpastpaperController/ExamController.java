@@ -52,29 +52,34 @@ public class ExamController {
 	}
 
 	@PostMapping("/exam/upload")
-	public String saveProduct(@RequestParam("files") MultipartFile[] files, RedirectAttributes redirectAttributes,Exams exams, BindingResult result) throws Exception {
+	public String saveProduct(@RequestParam("files") MultipartFile[] files, 
+	RedirectAttributes redirectAttributes,Exams exams, 
+	BindingResult result) throws Exception {
 		String fileName = StringUtils.cleanPath(exams.getOriginalFileName());
-		String subString = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-		String downloadUrl = "";
+		// String subString = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+		// String downloadUrl = "";
 		
 		//String[] fileExtensions = {".docx",".pdf"};
-		if(subString.toLowerCase().equals(".pdf")){
+		// if(subString.toLowerCase().equals(".pdf")){
 
-			downloadUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
-							.path("/download")
-							.path(String.valueOf(exams.getId()))
-							.toUriString();
+		// 	downloadUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+		// 					.path("/download")
+		// 					.path(String.valueOf(exams.getId()))
+		// 					.toUriString();
+			if(exams!=null){
+
+				for (MultipartFile file : files) {
+					service.saveFile(file, exams);
+				}
 			
-			for (MultipartFile file : files) {
-				service.saveFile(file, exams);
 			}
 			redirectAttributes.addFlashAttribute("errorMessage", "You have successfully uploaded file" );
 
-			return "redirect:/";
-		}
-		else{
-			return "error";
-		}
+			return "redirect:/exams/new";
+		// }
+		// else{
+		// 	return "error";
+		// }
 
 		//fetch url
 	}

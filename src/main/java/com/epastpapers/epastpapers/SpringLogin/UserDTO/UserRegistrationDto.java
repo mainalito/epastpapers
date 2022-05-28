@@ -15,3 +15,17 @@ public class UserRegistrationDto{
     private String userName;
     private String password;
 }
+
+////JAVA 14 RECORDS AS DTOS
+//public record UserRegistrationDto(String firstName, String lastName,
+//                                  String email, String userName, String password){
+//
+//    public UserRegistrationDto(String firstName, String lastName, String email, String userName, String password) {
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.email = email;
+//        this.userName = userName;
+//        this.password = password;
+//    }
+//
+//}

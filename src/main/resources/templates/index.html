@@ -20,7 +20,8 @@
   <ul>
     <li><a href="#">Home</a></li>
     <li><a href="#">About</a></li>
-    <li><a href="#">Contact</a></li>
+    <li sec:authorize="hasRole('ADMIN')"><a href="#" th:href="@{/exams/new}">Upload Exams</a></li>
+
   </ul>
   <div class="search-input">
     <form class="mini-search" method="get" th:action="@{/search}">
@@ -36,10 +37,10 @@
   </div>
 </nav>
 <h2>Welcome <span sec:authentication="principal.username"> User</span></h2>
-<div sec:authorize="hasRole('ROLE_ADMIN')">
+<div sec:authorize="hasRole('ADMIN')">
   This content is only shown to administrators.
 </div>
-<div sec:authorize="hasRole('ROLE_USER')">
+<div sec:authorize="hasRole('USER')">
   This content is only shown to users.
 </div>
 <div class="container">
