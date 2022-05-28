@@ -1,88 +1,91 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ExamPast Papers</title>
-  <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-          crossorigin="anonymous"
-          referrerpolicy="no-referrer"
-  />
-  <link rel="stylesheet" th:href="@{style.css}"/>
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ExamPast Papers</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" th:href="@{style.css}" />
+  </head>
 
-<body>
-<nav>
-  <ul>
-    <li><a href="#">Home</a></li>
-    <li><a href="#">About</a></li>
-    <li sec:authorize="hasRole('ADMIN')"><a href="#" th:href="@{/exams/new}">Upload Exams</a></li>
-
-  </ul>
-  <div class="search-input">
-    <form class="mini-search" method="get" th:action="@{/search}">
-      <input
-              type="text"
-              name="query"
-              placeholder="Search by Unit Name"
-              id=""
-              autocomplete="off"
-      />
-      <button class="icon"><i class="fas fa-search"></i></button>
-    </form>
-  </div>
-</nav>
-<h2>Welcome <span sec:authentication="principal.username"> User</span></h2>
-<div sec:authorize="hasRole('ADMIN')">
-  This content is only shown to administrators.
-</div>
-<div sec:authorize="hasRole('USER')">
-  This content is only shown to users.
-</div>
-<div class="container">
-  <div class="mini">
-    <div class="mini-title">
-      <i class="fa-solid fa-users"></i>
-      <a href="#" th:href="@{/faculty/1}">SOCIAL SCIENCES AND TECHNOLOGY</a>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li sec:authoriize="isAuthenticated()">
+          <a href="#" th:href="@{/logout}">Logout</a>
+        </li>
+        <li sec:authorize="hasRole('ADMIN')">
+          <a href="#" th:href="@{/exams/new}">Upload Exams</a>
+        </li>
+      </ul>
+      <div class="search-input">
+        <form class="mini-search" method="get" th:action="@{/search}">
+          <input
+            type="text"
+            name="query"
+            placeholder="Search by Unit Name"
+            id=""
+            autocomplete="off"
+          />
+          <button class="icon"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+    </nav>
+    <h2>Welcome <span sec:authentication="principal.username"> User</span></h2>
+    <div sec:authorize="hasRole('ADMIN')">
+      This content is only shown to administrators.
     </div>
-  </div>
-  <div class="mini">
-    <div class="mini-title">
-      <i class="fa-solid fa-atom"></i>
-      <a href="#" th:href="@{/faculty/2}">SCIENCE AND TECHNOLOGY</a>
+    <div sec:authorize="hasRole('USER')">
+      This content is only shown to users.
     </div>
-  </div>
-  <div class="mini">
-    <div class="mini-title">
-      <i class="fa-solid fa-tower-cell"></i>
-      <a href="#" th:href="@{/faculty/3}">MEDIA AND COMMUNICATION</a>
+    <div class="container">
+      <div class="mini">
+        <div class="mini-title">
+          <i class="fa-solid fa-users"></i>
+          <a href="#" th:href="@{/faculty/1}">SOCIAL SCIENCES AND TECHNOLOGY</a>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="mini-title">
+          <i class="fa-solid fa-atom"></i>
+          <a href="#" th:href="@{/faculty/2}">SCIENCE AND TECHNOLOGY</a>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="mini-title">
+          <i class="fa-solid fa-tower-cell"></i>
+          <a href="#" th:href="@{/faculty/3}">MEDIA AND COMMUNICATION</a>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="mini-title">
+          <i class="fa-solid fa-business-time"></i>
+          <a href="#" th:href="@{/faculty/4}">BUSINESS AND ECONOMICS</a>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="mini-title">
+          <i class="fa-solid fa-screwdriver-wrench"></i>
+          <a href="#" th:href="@{/faculty/5}">ENGINEERING AND TECHNOLOGY</a>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="mini-title">
+          <i class="fa-solid fa-code"></i>
+          <a href="#" th:href="@{/faculty/6}"
+            >COMPUTING INFORMATION AND TECHNOLOGY</a
+          >
+        </div>
+      </div>
     </div>
-
-  </div>
-  <div class="mini">
-    <div class="mini-title">
-      <i class="fa-solid fa-business-time"></i>
-      <a href="#" th:href="@{/faculty/4}">BUSINESS AND ECONOMICS</a>
-    </div>
-  </div>
-  <div class="mini">
-    <div class="mini-title">
-      <i class="fa-solid fa-screwdriver-wrench"></i>
-      <a href="#" th:href="@{/faculty/5}">ENGINEERING AND TECHNOLOGY</a>
-    </div>
-  </div>
-  <div class="mini">
-    <div class="mini-title">
-      <i class="fa-solid fa-code"></i>
-      <a href="#" th:href="@{/faculty/6}"
-      >COMPUTING INFORMATION AND TECHNOLOGY</a
-      >
-    </div>
-  </div>
-</div>
-</body>
+  </body>
 </html>
