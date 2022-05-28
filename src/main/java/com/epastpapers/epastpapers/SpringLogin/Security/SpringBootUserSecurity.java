@@ -55,14 +55,18 @@ public class SpringBootUserSecurity extends WebSecurityConfigurerAdapter {
         // .logoutSuccessUrl("/login?logout")
         // .permitAll();
         http.authorizeRequests()
-                .antMatchers("/loginAdmin","/registration**","/js/**","/css/**")
+                .antMatchers("/loginAdmin", "/registration**", "/js/**", "/css/**")
                 .permitAll().anyRequest().authenticated()
                 .and().formLogin().loginPage("/login")
                 .defaultSuccessUrl("/", true)
                 .permitAll()
-                .and().logout().logoutSuccessUrl("/login");
+                .and().logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout").permitAll().and()
 
-        http.csrf().disable();
+                .csrf().disable();
     }
 
 }
