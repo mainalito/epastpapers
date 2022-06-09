@@ -1,6 +1,7 @@
 package com.epastpapers.epastpapers.EpastpaperController;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Date;
 
 import javax.print.MultiDocPrintJob;
@@ -56,32 +57,26 @@ public class ExamController {
 	RedirectAttributes redirectAttributes,Exams exams, 
 	BindingResult result) throws Exception {
 		String fileName = StringUtils.cleanPath(exams.getOriginalFileName());
-		// String subString = fileName.substring(fileName.lastIndexOf("."), fileName.length());
-		// String downloadUrl = "";
+	
 		
-		//String[] fileExtensions = {".docx",".pdf"};
-		// if(subString.toLowerCase().equals(".pdf")){
-
-		// 	downloadUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
-		// 					.path("/download")
-		// 					.path(String.valueOf(exams.getId()))
-		// 					.toUriString();
 			if(exams!=null){
 
-				for (MultipartFile file : files) {
-					service.saveFile(file, exams);
-				}
+				Arrays.asList(files).stream()
+					.forEach(file -> {
+						try {
+							service.saveFile(file, exams);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					});
+			
 			
 			}
 			redirectAttributes.addFlashAttribute("errorMessage", "You have successfully uploaded file" );
 
 			return "redirect:/exams/new";
-		// }
-		// else{
-		// 	return "error";
-		// }
-
-		//fetch url
+	
 	}
 
 

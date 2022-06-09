@@ -25,6 +25,7 @@ public class Services implements StorageService {
 		
 		String fileName = StringUtils.cleanPath(Objects.requireNonNull(File.getOriginalFilename()));
 		String subString = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+		
 		try {
 			if (fileName.contains("..") ) {
 				throw new Exception("Filename contains invalid path " + fileName);
@@ -34,7 +35,7 @@ public class Services implements StorageService {
 				exams.setOriginalFileName(fileName);
 				exams.setData(File.getBytes());
 				exams.setFileType(File.getContentType());
-				System.out.println(fileName + "====================== " + subString);
+				exams.setFileSize(File.getSize());
 				examRepo.save(exams);
 			}
 			

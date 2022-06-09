@@ -37,7 +37,7 @@ public class Exams {
 
 	private String originalFileName;
 	private String fileType;
-
+	private Long fileSize;
 	@Lob
 	private byte[] data; //store file as an array in database
 

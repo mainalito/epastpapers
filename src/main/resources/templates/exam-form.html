@@ -20,7 +20,7 @@
             <div class="alert alert-success" th:text="${errorMessage}"></div>
         </div>
 		<form action="#" th:action="@{/exam/upload}" method="post" th:object="${exam}" encType="multipart/form-data">
-		<input type="file" name="files" required/>
+		<input type="file" name="files" multiple required/>
 			<div class="col-sm-8">
 				<label for="exampleInputEmail1" class="form-label">Unit Name for the Exam</label>
 				<input type="text" th:field="*{fileName}" class="form-control" id="exampleInputEmail1"

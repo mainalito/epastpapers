@@ -73,7 +73,8 @@ nav ul li a{
 }
 .mini-title a {
     text-decoration: none;
-    color: black;
+    color: royalblue;
+    font-weight: 600;
     margin-top: 30px;
 }
 
