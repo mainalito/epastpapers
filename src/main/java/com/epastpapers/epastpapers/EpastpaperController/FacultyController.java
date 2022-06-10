@@ -1,5 +1,9 @@
 package com.epastpapers.epastpapers.EpastpaperController;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import com.epastpapers.epastpapers.PastPapers.Exams;
@@ -33,6 +37,19 @@ public class FacultyController {
 	public String searchLikeStudents(@RequestParam("query") String query, Model model) {
 
 		model.addAttribute("results", examRepo.findByfileNameLike(StringUtils.capitalize(query)));
+		return "search";
+	}
+
+	@GetMapping("/filter")
+	public String filterWithinDates(@RequestParam ("date") String date, Model model){
+		
+		SimpleDateFormat formatter2=new SimpleDateFormat("yyyy-MM-dd");  
+		try {
+			model.addAttribute("filteredResults", examRepo.findByDateGreaterThan(formatter2.parse(date)));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "search";
 	}
 
