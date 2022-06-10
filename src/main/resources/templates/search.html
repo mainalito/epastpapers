@@ -176,6 +176,12 @@
           <button class="icon"><i class="fas fa-search"></i></button>
         </form>
       </div>
+      <div class="search-input">
+        <form class="mini-search" method="get" th:action="@{/filter}">
+         <input type="date" name="date" id="">
+          <button class="icon"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
     </nav>
     <div class="container">
       <div class="mini" th:each="result: ${results}">
@@ -187,6 +193,20 @@
           <a th:href="@{'/downloadFile/'+${result.id}}"
             ><i class="fa-solid fa-file-arrow-down"></i
           ></a>
+        </div>
+      </div>
+      <div class="mini" th:each="result: ${filteredResults}">
+        <div class="title">
+          <p class="fileName" th:text="${result.fileName}"></p>
+          <p class="year" th:text="${#dates.format(result.date, 'dd-MM-yyyy')}"></p>
+        </div>
+        <div class="download">
+          <a th:href="@{'/downloadFile/'+${result.id}}"
+            ><i class="fa-solid fa-file-arrow-down"></i
+          ></a>
+        </div>
+        <div class="size">
+          <p  th:text="${result.fileSize / 1024 } + 'kb'" ></p>
         </div>
       </div>
     </div>

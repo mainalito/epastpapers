@@ -1,6 +1,5 @@
 package com.epastpapers.epastpapers.PastPapers;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,15 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data

@@ -1,13 +1,13 @@
 package com.epastpapers.epastpapers.repository;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
-
-import javax.transaction.Transactional;
-
-import com.epastpapers.epastpapers.PastPapers.Exams;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import com.epastpapers.epastpapers.PastPapers.Exams;
 
 
 public interface ExamRepo extends CrudRepository<Exams, Long> {
@@ -20,6 +20,9 @@ public interface ExamRepo extends CrudRepository<Exams, Long> {
 	
 	
 	List<Exams>findByfaculty_id(Long id);
+
+	//find exams by dates
+	List<Exams> findByDateGreaterThan(Date date);
 	
 
 }

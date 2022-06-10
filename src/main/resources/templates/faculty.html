@@ -116,7 +116,7 @@
         box-shadow: 0px 0.3px 4px rgba(0, 0, 0, 0.17);
         background-color: white;
         padding: 2rem;
-        max-width: 380px;
+        width: 400px;
         height: 200px;
         margin-top: 40px;
         margin-left: 20px;
@@ -186,6 +186,12 @@
             id=""
             autocomplete="off"
           />
+          <button class="icon"><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <div class="search-input">
+        <form class="mini-search" method="get" th:action="@{/filter}">
+         <input type="date" name="date" id="">
           <button class="icon"><i class="fas fa-search"></i></button>
         </form>
       </div>
