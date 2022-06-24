@@ -21,8 +21,9 @@ public interface ExamRepo extends CrudRepository<Exams, Long> {
 	
 	List<Exams>findByfaculty_id(Long id);
 
-	//find exams by dates
-	List<Exams> findByDateGreaterThan(Date date);
+	//find exams by dates findBy'Column-name' and facultyId
+	@Query(value = "select * from exams where date between ?1 and ?2 and faculty_id=?3",nativeQuery = true)
+	List<Exams> findByDateBetweenAndfaculty_id(Date startDate, Date endDate,Long id);
 	
 
 }

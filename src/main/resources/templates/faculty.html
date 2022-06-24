@@ -55,7 +55,7 @@
         box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
       }
       .search-input input {
-        height: 40px;
+        height: 30px;
         outline: none;
         border: none;
         border-radius: 5px;
@@ -96,8 +96,15 @@
       }
       .container {
         display: flex;
+        align-items: center;
         flex-wrap: wrap;
       
+      }
+      .left-side {
+        margin-left: 1em;
+        border: 1px solid #9999;
+        padding: 20px 30px;
+        margin-top: 30px;
       }
 
       body {
@@ -113,13 +120,13 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        box-shadow: 0px 0.3px 4px rgba(0, 0, 0, 0.17);
+        box-shadow: 0 1.3px 12px -3px rgba(0, 0, 0, 0.4);
+       
         background-color: white;
         padding: 2rem;
         width: 400px;
         height: 200px;
-        margin-top: 40px;
-        margin-left: 20px;
+        margin: 20px 20px;
       }
 
       .title {
@@ -128,11 +135,10 @@
         align-items: center;
         justify-content: center;
       }
-      .title .fileName{
+      .title .fileName {
         font-weight: 600;
-
       }
-     
+
       .title .year {
         margin-left: 1rem;
         color: royalblue;
@@ -141,12 +147,12 @@
 
       .download {
         margin-top: 2em;
-         display: flex;
-         align-items: center;
-         justify-content: space-between;
-         width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
       }
-      .download .size p{
+      .download .size p {
         font-weight: 600;
       }
 
@@ -161,6 +167,25 @@
 
       .download a:hover {
         background-color: whitesmoke;
+        
+      }
+      section{
+        background-color: white;
+        box-shadow: 0px 0.3px 4px rgba(0, 0, 0, 0.17);
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        padding: 0 1em;
+        height: 50px;
+      }
+      section form .icon{
+        outline: none;
+        border: none;
+        background-color: transparent;
+      }
+      section form .icon i{
+        font-size: 1rem;
       }
       @media (max-width: 768px) {
         nav {
@@ -189,33 +214,57 @@
           <button class="icon"><i class="fas fa-search"></i></button>
         </form>
       </div>
-      <div class="search-input">
-        <form class="mini-search" method="get" th:action="@{/filter}">
-         <input type="date" name="date" id="">
-          <button class="icon"><i class="fas fa-search"></i></button>
-        </form>
-      </div>
     </nav>
-    
+    <section th:each="faculty: ${faculty}">
+     <form action="" method="get"  th:action="@{|/filter/${faculty.id}|}">
+      <!-- <input type="hidden" name="" th:value="${facultyExam.facultyId}"> -->
+        <label for="">From:</label>
+       <input type="date"  name="startDate" id="startDate" />
+       <label for="">To:</label>
+       <input type="date" name="endDate" id="endDate" />
+       <button class="icon"><i class="fas fa-search"></i></button>
+     </form>
+    </section>
+
     <div class="container">
       <div class="mini" th:each="faculty: ${facultyExam}">
         <div class="title">
           <p class="fileName" th:text="${faculty.fileName}"></p>
-         
-          <p class="year" th:text="${#dates.format(faculty.date, 'dd-MM-yyyy')}"></p>
+
+          <p
+            class="year"
+            th:text="${#dates.format(faculty.date, 'dd-MM-yyyy')}"
+          ></p>
         </div>
         <div class="download">
           <a th:href="@{'/downloadFile/'+${faculty.id}}"
             ><i class="fa-solid fa-file-arrow-down"></i
           ></a>
           <div class="size">
-            <p  th:text="${faculty.fileSize / 1024 } + 'kb'" ></p>
+            <p th:text="${faculty.fileSize / 1024 } + 'kb'"></p>
+          </div>
+        </div>
+      </div>
+      <div class="mini" th:each="faculty: ${filteredResults}">
+        <div class="title">
+          <p class="fileName" th:text="${faculty.fileName}"></p>
+
+          <p
+            class="year"
+            th:text="${#dates.format(faculty.date, 'dd-MM-yyyy')}"
+          ></p>
+        </div>
+        <div class="download">
+          <a th:href="@{'/downloadFile/'+${faculty.id}}"
+            ><i class="fa-solid fa-file-arrow-down"></i
+          ></a>
+          <div class="size">
+            <p th:text="${faculty.fileSize / 1024 } + 'kb'"></p>
           </div>
         </div>
       </div>
     </div>
-    <div th:if="${errorMessage}">
-      <div class="alert alert-success" th:text="${errorMessage}"></div>
-  </div>
+   
+   
   </body>
 </html>

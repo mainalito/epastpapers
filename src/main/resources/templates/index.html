@@ -27,7 +27,7 @@
           <a href="#" th:href="@{/exams/new}">Upload Exams</a>
         </li>
       </ul>
-      <div class="search-input">
+      <!-- <div class="search-input">
         <form class="mini-search" method="get" th:action="@{/search}">
           <input
             type="text"
@@ -38,7 +38,7 @@
           />
           <button class="icon"><i class="fas fa-search"></i></button>
         </form>
-      </div>
+      </div> -->
     </nav>
     <h2>Welcome <span sec:authentication="principal.username"> User</span></h2>
     <div sec:authorize="hasRole('ADMIN')">

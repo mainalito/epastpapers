@@ -5,8 +5,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import com.epastpapers.epastpapers.PastPapers.Exams;
+import com.epastpapers.epastpapers.PastPapers.FACULTY;
 import com.epastpapers.epastpapers.repository.ExamRepo;
 import com.epastpapers.epastpapers.repository.FacultyRepo;
 
@@ -40,17 +42,19 @@ public class FacultyController {
 		return "search";
 	}
 
-	@GetMapping("/filter")
-	public String filterWithinDates(@RequestParam ("date") String date, Model model){
+	@GetMapping("/filter/{id}")
+	public String filterWithinDates(@PathVariable Long id,@RequestParam ("startDate") String startDate, @RequestParam("endDate") String endDate,
+	 Model model){
 		
 		SimpleDateFormat formatter2=new SimpleDateFormat("yyyy-MM-dd");  
 		try {
-			model.addAttribute("filteredResults", examRepo.findByDateGreaterThan(formatter2.parse(date)));
+			model.addAttribute("filteredResults", examRepo.findByDateBetweenAndfaculty_id(formatter2.parse(startDate),
+			formatter2.parse(endDate),id));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "search";
+		return "faculty";
 	}
 
 	@GetMapping("/faculty/{id}")
@@ -58,6 +62,8 @@ public class FacultyController {
 	RedirectAttributes redirectAttributes) {
 
 		List<Exams> s = examRepo.findByfaculty_id(id);
+		FACULTY faculties = facultyRepo.findById(id).get();
+		model.addAttribute("faculty",faculties);
 		
 		if(!s.isEmpty()){
 			model.addAttribute("facultyExam", s);
@@ -66,8 +72,6 @@ public class FacultyController {
 		else{
 			redirectAttributes.addFlashAttribute("errorMessage", "No exams found" );
 		}
-
-
 		return "faculty";
 	}
 }
