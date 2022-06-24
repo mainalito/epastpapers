@@ -57,23 +57,20 @@ public class ExamController {
 	RedirectAttributes redirectAttributes,Exams exams, 
 	BindingResult result) throws Exception {
 		String fileName = StringUtils.cleanPath(exams.getOriginalFileName());
-	
-		
-			if(exams!=null){
 
-				Arrays.asList(files).stream()
-					.forEach(file -> {
-						try {
-							service.saveFile(file, exams);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					});
-			
-			
-			}
-			redirectAttributes.addFlashAttribute("errorMessage", "You have successfully uploaded file" );
+
+		Arrays.asList(files)
+			.forEach(file -> {
+				try {
+					service.saveFile(file, exams);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+
+
+		redirectAttributes.addFlashAttribute("errorMessage", "You have successfully uploaded file" );
 
 			return "redirect:/exams/new";
 	
