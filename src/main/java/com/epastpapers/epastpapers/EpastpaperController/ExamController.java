@@ -1,4 +1,5 @@
 package com.epastpapers.epastpapers.EpastpaperController;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -13,6 +14,7 @@ import com.epastpapers.epastpapers.repository.ExamRepo;
 import com.epastpapers.epastpapers.repository.FacultyRepo;
 import com.epastpapers.epastpapers.service.Services;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,24 +22,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
-
 @Controller
+
+@AllArgsConstructor
 public class ExamController {
-	@Autowired
-	ExamRepo examRepo;
-	@Autowired
-	FacultyRepo facultyRepo;
-	@Autowired
-	Services service;
+
+	private final ExamRepo examRepo;
+
+	private final FacultyRepo facultyRepo;
+
+	private final Services service;
 
 	@GetMapping("/exams")
 	public String fetchFiles(Model model) {
@@ -53,31 +53,28 @@ public class ExamController {
 	}
 
 	@PostMapping("/exam/upload")
-	public String saveProduct(@RequestParam("files") MultipartFile[] files, 
-	RedirectAttributes redirectAttributes,Exams exams, 
-	BindingResult result) throws Exception {
+	public String saveProduct(@RequestParam("files") MultipartFile[] files,
+			RedirectAttributes redirectAttributes, Exams exams,
+			BindingResult result) throws Exception {
 		String fileName = StringUtils.cleanPath(exams.getOriginalFileName());
 
-
 		Arrays.asList(files)
-			.forEach(file -> {
-				try {
-					service.saveFile(file, exams);
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			});
+				.forEach(file -> {
+					try {
+						service.saveFile(file, exams);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				});
 
+		redirectAttributes.addFlashAttribute("errorMessage", "You have successfully uploaded file");
 
-		redirectAttributes.addFlashAttribute("errorMessage", "You have successfully uploaded file" );
+		return "redirect:/exams/new";
 
-			return "redirect:/exams/new";
-	
 	}
 
-
-@GetMapping("/downloadFile/{id}")
+	@GetMapping("/downloadFile/{id}")
 	public void downloadDocument(@PathVariable("id") Long id, HttpServletResponse response) {
 		Exams exams = service.getFile(id);
 		response.setContentType(MediaType.parseMediaType(exams.getFileType()).toString());
@@ -94,4 +91,11 @@ public class ExamController {
 
 	}
 
+	@GetMapping("/delete/exam/{id}")
+	public String deleteDocument(@PathVariable("id") Long id) {
+
+		Exams exam = service.getFile(id);
+		service.deleteFile(id);
+		return "redirect:/faculty/"+exam.getFaculty().getId();
+	}
 }

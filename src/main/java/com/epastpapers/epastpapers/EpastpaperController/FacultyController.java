@@ -58,11 +58,10 @@ public class FacultyController {
 	}
 
 	@GetMapping("/faculty/{id}")
-	public String showFacultiesExams(@PathVariable Long id, Model model,
-	RedirectAttributes redirectAttributes) {
+	public String showFacultiesExams(@PathVariable Long id, Model model,RedirectAttributes redirectAttributes) {
 
 		List<Exams> s = examRepo.findByfaculty_id(id);
-		FACULTY faculties = facultyRepo.findById(id).get();
+		FACULTY faculties = facultyRepo.findById(id).orElseThrow(()->new RuntimeException("no faculty found"));
 		model.addAttribute("faculty",faculties);
 		
 		if(!s.isEmpty()){

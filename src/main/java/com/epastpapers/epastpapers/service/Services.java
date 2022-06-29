@@ -8,16 +8,18 @@ import java.util.Objects;
 import com.epastpapers.epastpapers.PastPapers.Exams;
 import com.epastpapers.epastpapers.repository.ExamRepo;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
+@AllArgsConstructor
 public class Services implements StorageService {
 
-	@Autowired
-	ExamRepo examRepo;
+
+	private final ExamRepo examRepo;
 
 	@Override
 	public void saveFile(MultipartFile File, Exams exams) throws Exception {
@@ -52,7 +54,7 @@ public class Services implements StorageService {
 	@Override
 	public Exams getFile(Long id) {
 		// TODO Auto-generated method stub
-		return examRepo.findById(id).get();
+		return examRepo.findById(id).orElseThrow(()-> new RuntimeException("no file found"));
 	}
 
 	@Override
@@ -61,4 +63,7 @@ public class Services implements StorageService {
 		return (List<Exams>) examRepo.findAll();
 	}
 
+    public void deleteFile(Long id) {
+		examRepo.deleteById(id);
+    }
 }

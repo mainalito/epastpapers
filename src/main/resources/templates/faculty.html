@@ -98,7 +98,6 @@
         display: flex;
         align-items: center;
         flex-wrap: wrap;
-      
       }
       .left-side {
         margin-left: 1em;
@@ -121,7 +120,7 @@
         align-items: center;
         flex-direction: column;
         box-shadow: 0 1.3px 12px -3px rgba(0, 0, 0, 0.4);
-       
+
         background-color: white;
         padding: 2rem;
         width: 400px;
@@ -167,9 +166,8 @@
 
       .download a:hover {
         background-color: whitesmoke;
-        
       }
-      section{
+      section {
         background-color: white;
         box-shadow: 0px 0.3px 4px rgba(0, 0, 0, 0.17);
         width: 100%;
@@ -179,12 +177,12 @@
         padding: 0 1em;
         height: 50px;
       }
-      section form .icon{
+      section form .icon {
         outline: none;
         border: none;
         background-color: transparent;
       }
-      section form .icon i{
+      section form .icon i {
         font-size: 1rem;
       }
       @media (max-width: 768px) {
@@ -216,14 +214,14 @@
       </div>
     </nav>
     <section th:each="faculty: ${faculty}">
-     <form action="" method="get"  th:action="@{|/filter/${faculty.id}|}">
-      <!-- <input type="hidden" name="" th:value="${facultyExam.facultyId}"> -->
+      <form action="" method="get" th:action="@{|/filter/${faculty.id}|}">
+        <!-- <input type="hidden" name="" th:value="${facultyExam.facultyId}"> -->
         <label for="">From:</label>
-       <input type="date"  name="startDate" id="startDate" />
-       <label for="">To:</label>
-       <input type="date" name="endDate" id="endDate" />
-       <button class="icon"><i class="fas fa-search"></i></button>
-     </form>
+        <input type="date" name="startDate" id="startDate" />
+        <label for="">To:</label>
+        <input type="date" name="endDate" id="endDate" />
+        <button class="icon"><i class="fas fa-search"></i></button>
+      </form>
     </section>
 
     <div class="container">
@@ -242,6 +240,11 @@
           ></a>
           <div class="size">
             <p th:text="${faculty.fileSize / 1024 } + 'kb'"></p>
+          </div>
+          <div sec:authorize="hasRole('ADMIN')">
+            <a th:href="@{'/delete/exam/'+${faculty.id}}">
+              <i class="fa-solid fa-trash"></i
+            ></a>
           </div>
         </div>
       </div>
@@ -264,7 +267,5 @@
         </div>
       </div>
     </div>
-   
-   
   </body>
 </html>
