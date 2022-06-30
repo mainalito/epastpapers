@@ -44,16 +44,16 @@ public class Users {
         this.email = email;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Users users = (Users) o;
-        return id != null && Objects.equals(id, users.id);
-    }
+    // @Override
+    // public boolean equals(Object o) {
+    //     if (this == o) return true;
+    //     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+    //     Users users = (Users) o;
+    //     return id != null && Objects.equals(id, users.id);
+    // }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
+    // @Override
+    // public int hashCode() {
+    //     return getClass().hashCode();
+    // }
 }
