@@ -36,10 +36,10 @@ public class UserServiceImplementation implements UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
        Optional<Users> users = userRepository.findByUserName(username);
-       if(users.isEmpty()){
-           throw new UsernameNotFoundException("Invalid Username or Password");
+    //    if(users.isEmpty()){
+    //        throw new UsernameNotFoundException("Invalid Username or Password");
 
-       }
+    //    }
        Users user = users.get();
        return new User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(
            user.getRoles()));
