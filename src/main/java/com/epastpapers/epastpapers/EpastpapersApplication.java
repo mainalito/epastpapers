@@ -27,8 +27,6 @@ public class EpastpapersApplication {
 		facultyRepo.save(new FACULTY("BUSINESS AND ECONOMICS"));
 		facultyRepo.save(new FACULTY("ENGINEERING AND TECHNOLOGY"));
 		facultyRepo.save(new FACULTY("COMPUTING AND INFORMATION TECHNOLOGY"));
-
-
 	}
 
 	@PostConstruct

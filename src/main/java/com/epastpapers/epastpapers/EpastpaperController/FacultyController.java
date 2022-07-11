@@ -45,14 +45,26 @@ public class FacultyController {
 	@GetMapping("/filter/{id}")
 	public String filterWithinDates(@PathVariable Long id,@RequestParam ("startDate") String startDate, @RequestParam("endDate") String endDate,
 	 Model model){
-		
-		SimpleDateFormat formatter2=new SimpleDateFormat("yyyy-MM-dd");  
-		try {
-			model.addAttribute("filteredResults", examRepo.findByDateBetweenAndfaculty_id(formatter2.parse(startDate),
-			formatter2.parse(endDate),id));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		LocalDate sDate= LocalDate.parse(startDate);
+		LocalDate eDate = LocalDate.parse(endDate);
+		if(sDate.isBefore(eDate)){
+
+			SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");  
+			try {
+				Date startingDate = formatter.parse(startDate);
+				Date endingDate = formatter.parse(endDate);
+				//check if end-date is > than start-date
+				
+				model.addAttribute("filteredResults", examRepo.findByDateBetweenAndfaculty_id(startingDate
+				,endingDate,id));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else{
+			System.out.println("Wrong dates");
+			model.addAttribute("error", "Wrong dates ");
 		}
 		return "faculty";
 	}
