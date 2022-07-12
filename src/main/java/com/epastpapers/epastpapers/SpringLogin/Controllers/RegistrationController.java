@@ -44,6 +44,10 @@ public class RegistrationController {
         Pattern pattern = Pattern.compile("^\\w{3}[- .]\\w{3}[- .]\\w{3}[/ .]\\w{4}$");
         return pattern.matcher(registrationNumber).matches();
     }
+    public static boolean checkForRegErrors(String registrationNumber){
+        Pattern pattern = Pattern.compile("^\\w{3}[- .]\\w{3}[- .]000[/ .]\\w{4}$");
+        return pattern.matcher(registrationNumber).matches();
+    }
 
     @PostMapping
     public String registerUserAccount(RedirectAttributes redirectAttributes,
@@ -51,12 +55,12 @@ public class RegistrationController {
 
         Users userPerson = new Users();
         String registrationNumber = userRegistrationDto.getUserName();
-        if (checkForRegex(registrationNumber)) {
+        if (checkForRegex(registrationNumber) && checkForRegErrors(registrationNumber)==false) {
             userPerson.setUserName(registrationNumber);
             userService.saveByRegisterUser(userRegistrationDto);
             return "redirect:/registration?success";
         }
-        redirectAttributes.addFlashAttribute("errorMessage", "Provide correct details");
+        redirectAttributes.addFlashAttribute("errorMessage", "Provide correct registration number");
         return "redirect:/registration";
     }
 }
