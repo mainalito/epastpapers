@@ -13,33 +13,50 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" th:href="@{style.css}" />
+    
   </head>
 
   <body>
     <nav>
       <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li sec:authoriize="isAuthenticated()">
-          <a href="#" th:href="@{/logout}">Logout</a>
-        </li>
+        <li><a href="#" th:href="@{/}">Home</a></li>
+      
         <li sec:authorize="hasRole('ADMIN')">
           <a href="#" th:href="@{/exams/new}">Upload Exams</a>
         </li>
+        <li sec:authorize="hasRole('ADMIN')">
+          <div class="dropdown">
+            <button class="dropbtn">Report</button>
+            <div class="dropdown-content">
+              <a href="#" th:href="@{/weekly}">Weekly Report</a>
+              <a href="#" th:href="@{/monthly}">Monthly Report</a>
+              <a href="#" th:href="@{/yearly}">Yearly Report</a>
+            </div>
+          </div>
+          <!-- <a href="" th:href="@{/yearly}">Yearly Report</a>
+          <label for="">Reports</label>
+          <select name="" id="">
+            <option value=""><a href="" th:href="@{/weekly}">Weekly Report</a></option>
+            <option value=""><a href="" th:href="@{/monthly}">Monthly Report</a></option>
+            <option value=""><a href="" th:href="@{/yearly}">Yearly Report</a></option>
+          </select> -->
+        </li>
+        <li sec:authoriize="isAuthenticated()">
+          <a href="#" th:href="@{/logout}">Logout</a>
+        </li>
       </ul>
-      <!-- <div class="search-input">
-        <form class="mini-search" method="get" th:action="@{/search}">
-          <input
-            type="text"
-            name="query"
-            placeholder="Search by Unit Name"
-            id=""
-            autocomplete="off"
-          />
-          <button class="icon"><i class="fas fa-search"></i></button>
-        </form>
-      </div> -->
     </nav>
+    <script th:inline="javascript">
+      /*<![CDATA[*/
+
+      //var message = /*[[${message}]]*/ '';
+      function getSelectedValue() {
+        let range = document.getElementById("list").value;
+        console.log(range);
+      }
+
+      /*]]>*/
+    </script>
     <h2>Welcome <span sec:authentication="principal.username"> User</span></h2>
     <div sec:authorize="hasRole('ADMIN')">
       This content is only shown to administrators.
@@ -87,5 +104,6 @@
         </div>
       </div>
     </div>
+    
   </body>
 </html>

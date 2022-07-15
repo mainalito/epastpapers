@@ -38,16 +38,5 @@ public class Exams {
 	private FACULTY faculty;
 
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-		Exams exams = (Exams) o;
-		return id != null && Objects.equals(id, exams.id);
-	}
-
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
+	
 }

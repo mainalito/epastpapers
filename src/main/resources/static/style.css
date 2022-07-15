@@ -9,9 +9,9 @@
 
 
 
-nav{
-    background-color:#4070f4;
-    padding: 1rem ;
+nav {
+    background-color: #4070f4;
+    padding: 1rem;
     width: 100%;
     display: flex;
     align-items: center;
@@ -19,58 +19,64 @@ nav{
 
 }
 
-nav ul{
+nav ul {
     display: flex;
     justify-content: center;
     justify-content: flex-end;
 }
+
 nav ul li {
- list-style-type: none;
- margin-left: 20px;
+    list-style-type: none;
+    margin-left: 20px;
 }
-nav ul li a{
+
+nav ul li a {
     text-decoration: none;
     color: white;
 }
-.search-input{
+
+.search-input {
     padding: 0.5rem 2rem;
-   background-color: white;
-   border-radius: 5px;
-   box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12) ;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 1px 5px 3px rgba(0, 0, 0, 0.12);
 
 }
-.search-input input{
-  height: 40px;
-   outline: none;
-   border: none;
-   border-radius: 5px;
-   padding: 0 60px 0 20px;
-   font-size: 16px;
-   box-shadow: 0px 0.3px 4px rgba(0, 0, 0, 0.17);
+
+.search-input input {
+    height: 40px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    padding: 0 60px 0 20px;
+    font-size: 16px;
+    box-shadow: 0px 0.3px 4px rgba(0, 0, 0, 0.17);
 }
 
-.mini-search{
-   display: flex;
-   align-items: center;
+.mini-search {
+    display: flex;
+    align-items: center;
 }
-.mini-search .icon{
-   margin-left: 10px;
-   font-size: 20px;
-   color: black;
-   cursor: pointer;
+
+.mini-search .icon {
+    margin-left: 10px;
+    font-size: 20px;
+    color: black;
+    cursor: pointer;
     background-color: transparent;
     border: none;
     outline: none;
     border-radius: 0.50rem;
-    
+
 }
 
-.mini-title{
+.mini-title {
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
 }
+
 .mini-title a {
     text-decoration: none;
     color: royalblue;
@@ -81,28 +87,30 @@ nav ul li a{
 .mini-title i {
     font-size: 1.5rem;
 }
+
 .container {
-   display: flex;
+    display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-    
-    
+
+
 }
 
-body{
+body {
     min-height: 100vh;
     min-width: none;
     background-color: #efefef;
     display: flex;
     align-items: center;
-    
+
     flex-direction: column;
 }
+
 .container .mini {
     display: flex;
     align-items: center;
     flex-direction: column;
-    box-shadow: 0 1.3px 12px -3px rgba(0, 0,0,0.4);
+    box-shadow: 0 1.3px 12px -3px rgba(0, 0, 0, 0.4);
     background-color: white;
     padding: 2rem;
     width: 400px;
@@ -139,7 +147,7 @@ body{
 }
 
 .mini .download button {
-    
+
     width: 200px;
     border: none;
     padding: 0.50rem;
@@ -155,11 +163,56 @@ body{
 .download button:hover {
     background-color: whitesmoke;
 }
-@media (max-width: 768px){
-    nav{
+
+.dropbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+@media (max-width: 768px) {
+    nav {
         flex-wrap: wrap;
     }
-    .search-input input{
+
+    .search-input input {
         height: 30px;
     }
 }

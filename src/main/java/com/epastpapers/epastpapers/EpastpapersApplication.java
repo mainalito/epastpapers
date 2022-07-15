@@ -3,6 +3,7 @@ package com.epastpapers.epastpapers;
 import javax.annotation.PostConstruct;
 
 import com.epastpapers.epastpapers.PastPapers.FACULTY;
+import com.epastpapers.epastpapers.repository.ExamRepo;
 import com.epastpapers.epastpapers.repository.FacultyRepo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import lombok.AllArgsConstructor;
 public class EpastpapersApplication {
 
 	@Autowired private  FacultyRepo facultyRepo;
+	@Autowired private ExamRepo examRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(EpastpapersApplication.class, args);
@@ -28,10 +30,13 @@ public class EpastpapersApplication {
 		facultyRepo.save(new FACULTY("ENGINEERING AND TECHNOLOGY"));
 		facultyRepo.save(new FACULTY("COMPUTING AND INFORMATION TECHNOLOGY"));
 	}
+ 
 
 	@PostConstruct
 	public void init(){
-		save();
+		//save();
+		// System.out.println("works");
+		// examRepo.findByDateRanges("12months").forEach(System.out::println);
 	}
 
 }

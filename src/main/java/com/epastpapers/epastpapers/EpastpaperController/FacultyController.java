@@ -35,6 +35,30 @@ public class FacultyController {
 		return "index";
 	}
 
+	@GetMapping("/weekly")
+	public String showReportsWeekly(Model model) {
+		model.addAttribute("weeklyExams", examRepo.findByDateRangesWeekly());
+		return "report";
+	}
+
+	@GetMapping("/monthly")
+	public String showReportsMonthly(Model model) {
+		model.addAttribute("monthlyExams", examRepo.findByDateRangesMonthly());
+		return "report";
+	}
+
+	@GetMapping("/yearly")
+	public String showReportsYearly(Model model) {
+		model.addAttribute("yearlyExams", examRepo.findByDateRangesYearly());
+		return "report";
+	}
+
+	@GetMapping("/reports")
+	public String showReports(Model model) {
+
+		return "report";
+	}
+
 	@GetMapping("/search")
 	public String searchLikeStudents(@RequestParam("query") String query, Model model) {
 
@@ -43,45 +67,52 @@ public class FacultyController {
 	}
 
 	@GetMapping("/filter/{id}")
-	public String filterWithinDates(@PathVariable Long id,@RequestParam ("startDate") String startDate, @RequestParam("endDate") String endDate,
-	 Model model){
-		LocalDate sDate= LocalDate.parse(startDate);
+	public String filterWithinDates(@PathVariable Long id, @RequestParam("startDate") String startDate,
+			@RequestParam("endDate") String endDate,
+			Model model) {
+		LocalDate sDate = LocalDate.parse(startDate);
 		LocalDate eDate = LocalDate.parse(endDate);
-		if(sDate.isBefore(eDate)){
+		if (sDate.isBefore(eDate)) {
 
-			SimpleDateFormat formatter=new SimpleDateFormat("yyyy-MM-dd");  
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			try {
 				Date startingDate = formatter.parse(startDate);
 				Date endingDate = formatter.parse(endDate);
-				//check if end-date is > than start-date
-				
-				model.addAttribute("filteredResults", examRepo.findByDateBetweenAndfaculty_id(startingDate
-				,endingDate,id));
+				// check if end-date is > than start-date
+				List<Exams> filteredExams = examRepo.findByDateBetweenAndfaculty_id(startingDate, endingDate, id);
+
+				if(filteredExams.size()>0){
+
+					model.addAttribute("filteredResults",filteredExams);
+				}
+				else{
+					model.addAttribute("empty","No results found");
+
+				}
+			
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		else{
-			System.out.println("Wrong dates");
-			model.addAttribute("error", "Wrong dates ");
+		} else {
+			
+			model.addAttribute("error", "Start Date "+ startDate + " cannot be greater or equal than End Date "+endDate);
 		}
 		return "faculty";
 	}
 
 	@GetMapping("/faculty/{id}")
-	public String showFacultiesExams(@PathVariable Long id, Model model,RedirectAttributes redirectAttributes) {
+	public String showFacultiesExams(@PathVariable Long id, Model model, RedirectAttributes redirectAttributes) {
 
 		List<Exams> s = examRepo.findByfaculty_id(id);
-		FACULTY faculties = facultyRepo.findById(id).orElseThrow(()->new RuntimeException("no faculty found"));
-		model.addAttribute("faculty",faculties);
-		
-		if(!s.isEmpty()){
+		FACULTY faculties = facultyRepo.findById(id).orElseThrow(() -> new RuntimeException("no faculty found"));
+		model.addAttribute("faculty", faculties);
+
+		if (!s.isEmpty()) {
 			model.addAttribute("facultyExam", s);
 
-		}
-		else{
-			redirectAttributes.addFlashAttribute("errorMessage", "No exams found" );
+		} else {
+			redirectAttributes.addFlashAttribute("errorMessage", "No exams found");
 		}
 		return "faculty";
 	}
