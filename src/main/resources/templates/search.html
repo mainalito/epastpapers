@@ -170,14 +170,14 @@
           <input
             type="text"
             name="query"
-            placeholder="type to search .." required
+            placeholder="type to search .."
+            required
             id=""
             autocomplete="off"
           />
           <button class="icon"><i class="fas fa-search"></i></button>
         </form>
       </div>
-     
     </nav>
     <!-- <section>
       <form action="" method="get" th:action="@{/filter}">
@@ -188,7 +188,7 @@
         <button class="icon"><i class="fas fa-search"></i></button>
       </form>
      </section> -->
- 
+
     <div class="container">
       <div th:if="${#lists.isEmpty(results)}">No Search Results found 🔍</div>
       <div class="mini" th:each="result: ${results}">
@@ -205,7 +205,6 @@
           ></a>
         </div>
       </div>
-      
     </div>
   </body>
 </html>

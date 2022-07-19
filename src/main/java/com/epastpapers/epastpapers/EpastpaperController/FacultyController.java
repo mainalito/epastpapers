@@ -62,7 +62,7 @@ public class FacultyController {
 	@GetMapping("/search")
 	public String searchLikeStudents(@RequestParam("query") String query, Model model) {
 
-		model.addAttribute("results", examRepo.findByfileNameLike(StringUtils.capitalize(query)));
+		model.addAttribute("results", examRepo.findByfileNameLike(query.toUpperCase()));
 		return "search";
 	}
 

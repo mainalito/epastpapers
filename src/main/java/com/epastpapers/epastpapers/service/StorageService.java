@@ -12,4 +12,7 @@ public interface StorageService {
 	Exams getFile(Long id);
 	List<Exams>getAllFiles();
 	void deleteFile(Long id);
+	List<Exams>weeklyReportList();
+	List<Exams>monthlyReportList();
+	List<Exams>yearlyReportList();
 }

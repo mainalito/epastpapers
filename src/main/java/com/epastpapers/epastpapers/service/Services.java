@@ -5,6 +5,8 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
+import javax.transaction.Transactional;
+
 import com.epastpapers.epastpapers.PastPapers.Exams;
 import com.epastpapers.epastpapers.repository.ExamRepo;
 
@@ -15,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
+@Transactional
 @AllArgsConstructor
 public class Services implements StorageService {
 
@@ -66,4 +69,22 @@ public class Services implements StorageService {
     public void deleteFile(Long id) {
 		examRepo.deleteById(id);
     }
+
+	@Override
+	public List<Exams> weeklyReportList() {
+		// TODO Auto-generated method stub
+		return examRepo.findByDateRangesWeekly();
+	}
+
+	@Override
+	public List<Exams> monthlyReportList() {
+		// TODO Auto-generated method stub
+		return examRepo.findByDateRangesMonthly();
+	}
+
+	@Override
+	public List<Exams> yearlyReportList() {
+		// TODO Auto-generated method stub
+		return examRepo.findByDateRangesYearly();
+	}
 }
