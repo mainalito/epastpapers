@@ -1,9 +1,12 @@
 package com.epastpapers.epastpapers.EpastpaperController;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import javax.print.MultiDocPrintJob;
 import javax.servlet.ServletOutputStream;
@@ -12,7 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.epastpapers.epastpapers.PastPapers.Exams;
 import com.epastpapers.epastpapers.repository.ExamRepo;
 import com.epastpapers.epastpapers.repository.FacultyRepo;
+import com.epastpapers.epastpapers.service.ExportFile;
 import com.epastpapers.epastpapers.service.Services;
+import com.lowagie.text.DocumentException;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,10 +62,12 @@ public class ExamController {
 			RedirectAttributes redirectAttributes, Exams exams,
 			BindingResult result) throws Exception {
 		String fileName = StringUtils.cleanPath(exams.getOriginalFileName());
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 
 		Arrays.asList(files)
 				.forEach(file -> {
 					try {
+						
 						service.saveFile(file, exams);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -96,6 +103,58 @@ public class ExamController {
 
 		Exams exam = service.getFile(id);
 		service.deleteFile(id);
-		return "redirect:/faculty/"+exam.getFaculty().getId();
+		return "redirect:/faculty/" + exam.getFaculty().getId();
+	}
+
+	@GetMapping("/export/pdf/weekly")
+	public void exportToPDFWeekly(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date());
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=pastpapers_" + currentDateTime + ".pdf";
+		response.setHeader(headerKey, headerValue);
+
+		List<Exams> listExams = service.weeklyReportList();
+		listExams.stream().map(x -> x.getFileName()).forEach(System.out::println);
+
+		ExportFile exporter = new ExportFile(listExams);
+		exporter.export(response);
+
+	}
+
+	@GetMapping("/export/pdf/monthly")
+	public void exportToPDFMonthly(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date());
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=pastpapers_" + currentDateTime + ".pdf";
+		response.setHeader(headerKey, headerValue);
+
+		List<Exams> listExams = service.monthlyReportList();
+
+		ExportFile exporter = new ExportFile(listExams);
+		exporter.export(response);
+
+	}
+
+	@GetMapping("/export/pdf/yearly")
+	public void exportToPDFYearly(HttpServletResponse response) throws DocumentException, IOException {
+		response.setContentType("application/pdf");
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String currentDateTime = dateFormatter.format(new Date());
+
+		String headerKey = "Content-Disposition";
+		String headerValue = "attachment; filename=pastpapers_" + currentDateTime + ".pdf";
+		response.setHeader(headerKey, headerValue);
+
+		List<Exams> listExams = service.yearlyReportList();
+
+		ExportFile exporter = new ExportFile(listExams);
+		exporter.export(response);
+
 	}
 }
