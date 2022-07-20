@@ -179,15 +179,6 @@
         </form>
       </div>
     </nav>
-    <!-- <section>
-      <form action="" method="get" th:action="@{/filter}">
-         <label for="">From:</label>
-        <input type="date" onchange="handler(event)" name="startDate" id="startDate" />
-        <label for="">To:</label>
-        <input type="date" name="endDate" id="endDate" />
-        <button class="icon"><i class="fas fa-search"></i></button>
-      </form>
-     </section> -->
 
     <div class="container">
       <div th:if="${#lists.isEmpty(results)}">No Search Results found 🔍</div>

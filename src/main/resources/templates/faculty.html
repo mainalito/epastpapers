@@ -163,7 +163,6 @@
 
       .download a i {
         font-size: 1.4rem;
-        
       }
 
       .download a:hover {
@@ -187,12 +186,12 @@
       section form .icon i {
         font-size: 1rem;
       }
-      .alert{
+      .alert {
         background-color: rgb(237, 168, 168);
         margin-top: 1rem;
         padding: 0.7rem;
       }
-      .result{
+      .result {
         background-color: rgb(237, 168, 168);
         margin-top: 1rem;
         padding: 0.7rem;
@@ -217,7 +216,8 @@
             name="query"
             placeholder="Search by Unit Name"
             id=""
-            autocomplete="off" required
+            autocomplete="off"
+            required
           />
           <button class="icon"><i class="fas fa-search"></i></button>
         </form>
@@ -230,12 +230,12 @@
       <div class="alert" th:text="${empty}"></div>
     </div>
     <section th:each="faculty: ${faculty}">
-      <form action=""  method="get" th:action="@{|/filter/${faculty.id}|}">
+      <form action="" method="get" th:action="@{|/filter/${faculty.id}|}">
         <!-- <input type="hidden" name="" th:value="${facultyExam.facultyId}"> -->
         <label for="">From:</label>
         <input type="date" name="startDate" id="startDate" required />
         <label for="">To:</label>
-        <input type="date"  name="endDate" id="endDate" required />
+        <input type="date" name="endDate" id="endDate" required />
         <button class="icon"><i class="fas fa-search"></i></button>
       </form>
     </section>
@@ -267,7 +267,7 @@
           </div>
         </div>
       </div>
-       <!-- checking whether list is not empty
+      <!-- checking whether list is not empty
     <div class="result" th:if="${#lists.isEmpty(filteredResults)}">
       <p>No Results Found </p>
     </div> -->
@@ -293,11 +293,15 @@
     <script th:inline="javascript">
       /*<![CDATA[*/
       //validation of dates
-          //let message = /*[[${message}]]*/ ''; 
-          let endDate = document.getElementById('endDate').setAttribute('max', new Date().toISOString().slice(0, 10) );
-          let startDate = document.getElementById('startDate').setAttribute('max', new Date().toISOString().slice(0, 10) );
-      
+      //let message = /*[[${message}]]*/ '';
+      let endDate = document
+        .getElementById("endDate")
+        .setAttribute("max", new Date().toISOString().slice(0, 10));
+      let startDate = document
+        .getElementById("startDate")
+        .setAttribute("max", new Date().toISOString().slice(0, 10));
+
       /*]]>*/
-      </script>
+    </script>
   </body>
 </html>
