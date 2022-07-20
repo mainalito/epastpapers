@@ -13,37 +13,38 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" th:href="@{style.css}" />
-    
   </head>
 
   <body>
     <nav>
       <ul>
-        <li><a href="#" th:href="@{/}">Home</a></li>
-      
-        <li sec:authorize="hasRole('ADMIN')">
-          <a href="#" th:href="@{/exams/new}">Upload Exams</a>
-        </li>
-        <li sec:authorize="hasRole('ADMIN')">
-          <div class="dropdown">
-            <button class="dropbtn">Report</button>
-            <div class="dropdown-content">
-              <a href="#" th:href="@{/export/pdf/weekly}">Weekly Report</a>
-              <a href="#"  th:href="@{/export/pdf/monthly}">Monthly Report</a>
-              <a href="#"  th:href="@{/export/pdf/yearly}">Yearly Report</a>
+        <div class="links">
+          <li><a href="#" th:href="@{/}">Home</a></li>
+
+          <li sec:authorize="hasRole('ADMIN')">
+            <a href="#" th:href="@{/exams/new}">Upload Exams</a>
+          </li>
+          <li sec:authorize="hasRole('ADMIN')">
+            <div class="dropdown">
+              <button class="dropbtn">
+                <i class="fa-solid fa-print"></i> <small>Report</small>
+              </button>
+              <div class="dropdown-content">
+                <a href="#" th:href="@{/export/pdf/weekly}">Weekly Report</a>
+                <a href="#" th:href="@{/export/pdf/monthly}">Monthly Report</a>
+                <a href="#" th:href="@{/export/pdf/yearly}">Yearly Report</a>
+              </div>
             </div>
-          </div>
-          <!-- <a href="" th:href="@{/yearly}">Yearly Report</a>
-          <label for="">Reports</label>
-          <select name="" id="">
-            <option value=""><a href="" th:href="@{/weekly}">Weekly Report</a></option>
-            <option value=""><a href="" th:href="@{/monthly}">Monthly Report</a></option>
-            <option value=""><a href="" th:href="@{/yearly}">Yearly Report</a></option>
-          </select> -->
-        </li>
-        <li sec:authoriize="isAuthenticated()">
-          <a href="#" th:href="@{/logout}">Logout</a>
-        </li>
+          </li>
+        </div>
+        <div class="logout">
+          <li sec:authoriize="isAuthenticated()">
+            <a href="#" th:href="@{/logout}"
+              ><small style="margin-right: 0.5rem;">Logout  </small><i class="fa-solid fa-arrow-right-from-bracket"></i>
+              </a
+            >
+          </li>
+        </div>
       </ul>
     </nav>
     <script th:inline="javascript">
@@ -104,6 +105,5 @@
         </div>
       </div>
     </div>
-    
   </body>
 </html>

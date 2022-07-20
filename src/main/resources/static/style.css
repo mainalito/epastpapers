@@ -22,17 +22,42 @@ nav {
 nav ul {
     display: flex;
     justify-content: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+    width: 100%;
 }
-
-nav ul li {
+.links{
+    display: flex;
+    align-items: center;
+}
+.logout{
+    display: flex;
+    align-items: center;
+}
+nav ul .links li{
     list-style-type: none;
     margin-left: 20px;
 }
+.logout li a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.logout li{
+    list-style-type: none;
+    margin-left: 2rem;
+}
 
-nav ul li a {
+.logout li a i{
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+nav ul .links li a, .logout li a {
     text-decoration: none;
     color: white;
+}
+nav ul .links li a:hover{
+    background-color: #5d7bcd;
+    padding: 0.5rem;
 }
 
 .search-input {
@@ -182,7 +207,7 @@ body {
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f1f1f1;
+    background-color: black;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
