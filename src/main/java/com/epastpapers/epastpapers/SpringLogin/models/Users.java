@@ -14,13 +14,16 @@ import java.util.Objects;
 @NoArgsConstructor
 @Table(name = "userPerson", uniqueConstraints = @UniqueConstraint(columnNames = "registrationNumber"))
 public class Users {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
     private String lastName;
+
     @Column(name = "registrationNumber")
     private String userName;
+
     private String email;
     private String password;
 
@@ -44,16 +47,5 @@ public class Users {
         this.email = email;
     }
 
-    // @Override
-    // public boolean equals(Object o) {
-    //     if (this == o) return true;
-    //     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-    //     Users users = (Users) o;
-    //     return id != null && Objects.equals(id, users.id);
-    // }
-
-    // @Override
-    // public int hashCode() {
-    //     return getClass().hashCode();
-    // }
+   
 }

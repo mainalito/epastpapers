@@ -2,9 +2,12 @@ package com.epastpapers.epastpapers.SpringLogin.Controllers;
 
 import java.util.regex.Pattern;
 
+import com.epastpapers.epastpapers.SpringLogin.Repository.UserRepository;
 import com.epastpapers.epastpapers.SpringLogin.Service.UserService;
 import com.epastpapers.epastpapers.SpringLogin.UserDTO.UserRegistrationDto;
 import com.epastpapers.epastpapers.SpringLogin.models.Users;
+
+import lombok.AllArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,15 +16,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/registration")
+@AllArgsConstructor
 public class RegistrationController {
-    @Autowired
-    private UserService userService;
 
-    // private final UserService userService;
-
-    // public RegistrationController(UserService userService) {
-    //     this.userService = userService;
-    // }
+    private  UserService userService;
+    private  UserRepository userRepository;
 
     @GetMapping("/home")
     public String home() {
@@ -44,7 +43,8 @@ public class RegistrationController {
         Pattern pattern = Pattern.compile("^\\w{3}[- .]\\w{3}[- .]\\w{3}[/ .]\\w{4}$");
         return pattern.matcher(registrationNumber).matches();
     }
-    public static boolean checkForRegErrors(String registrationNumber){
+
+    public static boolean checkForRegErrors(String registrationNumber) {
         Pattern pattern = Pattern.compile("^\\w{3}[- .]\\w{3}[- .]000[/ .]\\w{4}$");
         return pattern.matcher(registrationNumber).matches();
     }
@@ -55,7 +55,10 @@ public class RegistrationController {
 
         Users userPerson = new Users();
         String registrationNumber = userRegistrationDto.getUserName();
-        if (checkForRegex(registrationNumber) && checkForRegErrors(registrationNumber)==false) {
+        boolean existsUsersByUsername = userRepository.existsByUserName(registrationNumber);
+        if (checkForRegex(registrationNumber)
+                && checkForRegErrors(registrationNumber) == false
+                && existsUsersByUsername == false) {
             userPerson.setUserName(registrationNumber);
             userService.saveByRegisterUser(userRegistrationDto);
             return "redirect:/registration?success";

@@ -32,8 +32,9 @@ public class Exams {
 	private byte[] data; //store file as an array in database
 
 
-	//@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	//@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+
 	private Date date;
 
 	@ManyToOne

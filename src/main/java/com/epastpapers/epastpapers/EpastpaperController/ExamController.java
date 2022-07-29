@@ -63,7 +63,7 @@ public class ExamController {
 			BindingResult result) throws Exception {
 		String fileName = StringUtils.cleanPath(exams.getOriginalFileName());
 		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-
+			Arrays.asList(files).forEach(System.out::print);
 		Arrays.asList(files)
 				.forEach(file -> {
 					try {
