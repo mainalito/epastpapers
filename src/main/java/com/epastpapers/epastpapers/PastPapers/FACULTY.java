@@ -1,5 +1,11 @@
 package com.epastpapers.epastpapers.PastPapers;
 
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
 import java.util.concurrent.atomic.LongAdder;
 
@@ -15,6 +21,7 @@ import javax.persistence.OneToMany;
 
 
 @Entity
+
 public class FACULTY {
 	
 	@Id
@@ -25,11 +32,17 @@ public class FACULTY {
 	private String name;
 
 	public FACULTY() {}
+	public FACULTY(String name,Long id) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
 	public FACULTY(String name) {
 		super();
 		this.name = name;
 	}
-	public Long getId() {
+
+    public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {

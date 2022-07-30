@@ -7,6 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -41,6 +42,16 @@ public class Exams {
 	@JoinColumn(name = "faculty_id")
 	private FACULTY faculty;
 
+	public Exams(Long id,String fileName,String originalFileName,String fileType, Long fileSize, Date date, FACULTY faculty){
+		this.id=id;
+		this.fileName=fileName;
+		this.originalFileName=originalFileName;
+		this.fileType=fileType;
+		this.fileSize=fileSize;
+		this.date=date;
+		this.faculty=faculty;
+	}
 
-	
+
+
 }
